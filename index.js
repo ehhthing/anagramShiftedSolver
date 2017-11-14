@@ -1,6 +1,7 @@
+const startTime = Date.now();
 const fs = require("fs");
 const oWords = fs.readFileSync("words.txt").toString().split("\n");
-const words = fs.readFileSync("words.txt").toString().split("\n").map(function(x) {
+const words = oWords.map(function(x) {
     return x.split("").sort().join("")
 });
 const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -11,5 +12,7 @@ for (i = 0; i < 26; i++) {
         if (t > 25) t %= 26;
         return letters[t];
     }).sort().join("");
-    if(words.indexOf(out) !== -1) console.log("Answer: " + oWords[words.indexOf(out)])
+    var indexOf = words.indexOf(out)
+    if(indexOf !== -1) console.log("Answer: " + oWords[indexOf])
 }
+console.log('Took ' + (Date.now() - startTime) + 'ms')
